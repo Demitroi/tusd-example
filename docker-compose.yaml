@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  minio:
+    image: minio/minio:RELEASE.2019-08-14T20-37-41Z
+    networks: 
+      - tusd
+    ports:
+      - "9000:9000"
+    volumes:
+      - "./data/:/data/"
+    environment: 
+      MINIO_ACCESS_KEY: AKIAIOSFODNN7EXAMPLE
+      MINIO_SECRET_KEY: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+    command: server /data
+  tusd:
+    image: tusproject/tusd:0.13.3
+    networks: 
+      - tusd
+    ports:
+      - "1080:1080"
+    environment: 
+      AWS_ACCESS_KEY_ID: AKIAIOSFODNN7EXAMPLE
+      AWS_SECRET_ACCESS_KEY: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+      AWS_REGION: eu-west-1
+    command: -s3-bucket mybucket -s3-endpoint http://minio:9000
+    depends_on: 
+      - minio
+  frontend:
+    image: nginx:1.17.3-alpine
+    ports:
+      - "9506:80"
+    volumes:
+      - "./public/:/usr/share/nginx/html:ro"
+    depends_on: 
+      - tusd
+networks: 
+  tusd: 
