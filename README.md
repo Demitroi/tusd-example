@@ -1,5 +1,5 @@
 # tusd-example
-Example using [MinIO](https://min.io/) as Amazon S3 Object Storage, [tusd](https://github.com/tus/tusd) as Server Implementation of tus: the open protocol for resumable file uploads https://tus.io/ and [Uppy](https://uppy.io/) as Frontend
+Example using [MinIO](https://min.io/) as Amazon S3 Object Storage, [tusd](https://github.com/tus/tusd) as Server Implementation of tus: the open protocol for resumable file uploads https://tus.io/ and [Uppy](https://uppy.io/) as Frontend. All running on [Docker](https://www.docker.com/)
 
 1. Start the services
 ```
@@ -12,7 +12,7 @@ $ docker-compose up -d
 3. Login with the default credentials that are in the ```docker-compose.yaml``` file
 ![2.jpg](images/2.jpg)
 
-4. Create a bucket called mybucket
+4. Create a bucket called ```mybucket```
 ![3.jpg](images/3.jpg)
 ![4.jpg](images/4.jpg)
 
